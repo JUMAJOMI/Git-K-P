@@ -1,1 +1,154 @@
-<h1>Convenio</h1>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Convenio ARL SURA - K&P COLOMBIA</title>
+    
+    <!-- SEO y Metadatos -->
+    <meta name="description" content="Convenio estratégico entre K&P COLOMBIA y ARL SURA para asesorías corporativas y gestión en Seguridad y Salud en el Trabajo (SST).">
+    
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="icon" type="image/png" href="images/LOGO K&P (1).png">
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <div class="logo-container">
+                <img src="images/LOGO K&P (1).png" alt="Logo K&P" class="logo-img">
+                <span class="logo-text">K&P COLOMBIA</span>
+            </div>
+        </div>
+        
+        <!-- Menú de navegación sincronizado -->
+        <nav class="nav" id="navMenu">
+            <ul>
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="capacitaciones.html">Capacitaciones</a></li>
+                <li><a href="index.html#galeria">Trabajo Realizado</a></li>
+                <li><a href="convenio.html">Convenio ARL SURA</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- SECCIÓN HERO DE CONVENIO CON IMAGEN DE FONDO/REFERENCIA -->
+    <section id="inicio" class="hero" style="background: linear-gradient(rgba(11, 59, 37, 0.8), rgba(11, 59, 37, 0.8)), url('images/bosque.jpg'); background-size: cover; background-position: center;">
+        <div class="hero-content">
+            <h2>Convenio Estratégico ARL SURA</h2>
+            <p>Alianzas sólidas y asesorías corporativas para garantizar la gestión integral del riesgo laboral.</p>
+            <a href="#detalles-convenio" class="btn">Conocer más</a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONTENIDO DETALLADO CON IMÁGENES -->
+    <section id="detalles-convenio" class="section">
+        <h2>Gestión Integral en Seguridad y Salud (SST)</h2>
+        <p>
+            En <strong>K&P COLOMBIA</strong> impulsamos el bienestar operacional mediante el respaldo técnico de <strong>ARL SURA</strong>. Nuestras asesorías corporativas están diseñadas para blindar a las empresas frente a riesgos laborales, optimizar procesos de campo y certificar el cumplimiento normativo nacional.
+        </p>
+        <br>
+        
+        <div class="grid-galeria">
+            <div class="card" style="text-align: center;">
+                <img src="images/ente.jpg" alt="Prevención de Riesgos" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px;">
+                <h3>Prevención de Riesgos</h3>
+                <p>Estrategias avanzadas de identificación de peligros y control operacional adaptadas al sector agroforestal e industrial.</p>
+            </div>
+
+            <div class="card card-vision" style="text-align: center;">
+                <img src="images/conferencia.jpg" alt="Acompañamiento Técnico" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px;">
+                <h3>Acompañamiento Técnico</h3>
+                <p>Auditorías y soporte corporativo continuo de la mano con los estándares de calidad exigidos por ARL SURA.</p>
+            </div>
+
+            <div class="card" style="text-align: center;">
+                <img src="images/grua.jpg" alt="Formación y Cultura" style="width: 100%; height: 180px; object-fit: cover; border-radius: 6px; margin-bottom: 15px;">
+                <h3>Formación y Cultura</h3>
+                <p>Talleres orientados a fomentar una cultura preventiva real en todos los niveles jerárquicos de la organización.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE RESPALDO INSTITUCIONAL -->
+    <section class="section bg-light" style="text-align: center;">
+        <h2>Alianza por la Seguridad Operacional</h2>
+        <p class="subtitle" style="max-width: 800px; margin: 0 auto 20px auto;">
+            La unión de nuestra experiencia en campo con la solidez de ARL SURA garantiza entornos de trabajo seguros y altamente productivos.
+        </p>
+        <div style="margin-top: 20px;">
+            <img src="images/sura.png" alt="Logo ARL SURA" style="max-width: 150px; height: auto;">
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE FORMULARIO DE CONTACTO INTEGRADO -->
+    <section id="contacto-convenio" class="section">
+        <h2 style="text-align: center;">Solicita una Asesoría Empresarial</h2>
+        <p class="subtitle" style="text-align: center; max-width: 700px; margin: 0 auto 30px auto;">
+            ¿Tu empresa necesita optimizar su gestión en SST bajo el convenio ARL SURA? Escríbenos y nos pondremos en contacto contigo.
+        </p>
+        
+        <div style="max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); border-top: 4px solid #0b3b25;">
+            <form id="formConvenio" onsubmit="event.preventDefault(); alert('¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.');">
+                <div style="margin-bottom: 15px;">
+                    <label for="nombreEmpresa" style="display: block; font-weight: 600; margin-bottom: 5px; color: #0b3b25;">Empresa u Organización:</label>
+                    <input type="text" id="nombreEmpresa" required placeholder="Nombre de tu empresa" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="emailContacto" style="display: block; font-weight: 600; margin-bottom: 5px; color: #0b3b25;">Correo Electrónico:</label>
+                    <input type="email" id="emailContacto" required placeholder="correo@empresa.com" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="mensajeDetalle" style="display: block; font-weight: 600; margin-bottom: 5px; color: #0b3b25;">Detalle de la Asesoría:</label>
+                    <textarea id="mensajeDetalle" rows="4" required placeholder="¿En qué área de SST requieres apoyo?" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;"></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%; cursor: pointer; border: none;">Enviar Solicitud</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <h3>K&P COLOMBIA</h3>
+                <p>Soluciones en asesorías y capacitaciones</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contacto</h4>
+                <p>Email: kypcolombia@gmail.com</p>
+                <p>Teléfono: +57 3113300110</p>
+                <p>Ubicación: Colombia</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 K&P COLOMBIA - Todos los derechos reservados por <strong>&copy;JUMAJOMI</strong></p>
+        </div>
+    </footer>
+  
+    <!-- ================= CHATBOX FLOTANTE ================= -->
+    <div id="chatWidget" class="chat-widget-wrapper">
+        <button id="chatToggleBtn" class="chat-toggle-btn" aria-label="Abrir chat">💬</button>
+        <div id="chatContainer" class="chat-container">
+            <div class="chat-header">
+                <span>Asistente K&P COLOMBIA</span>
+                <button id="chatCloseBtn" class="chat-close-btn">&times;</button>
+            </div>
+            <div class="chat-mensajes" id="chatMensajes">
+                <div class="mensaje mensaje-bot">¡Hola! Pregúntame sobre el convenio ARL SURA o nuestras asesorías corporativas.</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="inputText" placeholder="Escribe un mensaje..." autocomplete="off">
+                <button id="btnEnviar">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script JavaScript -->
+    <script src="js/scrip.js"></script>
+    
+</body>
+
+</html>
