@@ -162,13 +162,13 @@ function generarRespuestaBot(texto) {
     }
     else if (msg.includes("certificado") || msg.includes("certificados")) {
         return "Todas nuestras capacitaciones entregan certificado. Dependiendo del curso puede ser avalado y válido ante ARL y Ministerio de Trabajo.";
-    }
+    }   
     else if (msg.includes("quiénes somos") || msg.includes("quienes somos")) {
         return "Somos K&P Colombia, especialistas en capacitaciones empresariales, asesorías corporativas y gestión de SST en convenio con ARL SURA.";
     }
     // ==========================================
     else {
-        return "Hmmmmmmmmm.......";
+        return "Lo Siento, no puedo entender tu mensaje";
     }
 }
 
