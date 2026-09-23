@@ -478,3 +478,169 @@ body > div:last-child a[href*="netlify"] {
     height: 0 !important;
     overflow: hidden !important;
 }
+/* ==========================================
+   NUEVOS ESTILOS: MENÚ MÓVIL Y GALERÍA LIGHTBOX
+   ========================================== */
+
+/* --- MENÚ HAMBURGUESA MÓVIL --- */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    .nav.active {
+        display: block;
+    }
+    .nav ul {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+    .nav li {
+        margin: 10px 0;
+    }
+}
+
+/* --- GALERÍA E INTERACTIVIDAD DE IMÁGENES --- */
+.galeria-imagenes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.galeria-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* --- VENTANA MODAL LIGHTBOX --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    max-width: 85%;
+    max-height: 85vh;
+    border-radius: 5px;
+    object-fit: contain;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+/* --- CORRECCIÓN DE VISIBILIDAD DEL MENÚ EN COMPUTADOR --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #064e3b; /* Fondo verde oscuro corporativo */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #ffffff !important; /* Texto blanco asegurado */
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #a3e4d7 !important; /* Color de realce al pasar el mouse */
+}
+
+/* Ocultar botón hamburguesa en pantallas grandes */
+.menu-toggle {
+    display: none;
+}
+/* --- CORRECCIÓN DE VISIBILIDAD DEL MENÚ EN COMPUTADOR --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background-color: #064e3b; /* Fondo verde oscuro corporativo */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #ffffff !important; /* Texto blanco asegurado */
+    font-weight: 600;
+    font-size: 15px;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #a3e4d7 !important; /* Color de realce al pasar el mouse */
+}
+
+/* Ocultar botón hamburguesa por defecto en computadores */
+.menu-toggle {
+    display: none;
+}
