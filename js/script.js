@@ -23,6 +23,7 @@ chatCloseBtn.addEventListener('click', () => {
 });
 
 // Función principal para enviar el mensaje del usuario
+// Función principal para enviar el mensaje del usuario
 function enviarMensaje() {
     const textoUsuario = inputText.value.trim();
     if (textoUsuario === "") return;
@@ -39,123 +40,155 @@ function enviarMensaje() {
 
     // Simula el tiempo de respuesta del bot
     setTimeout(() => {
+        // Quitar el indicador de escribiendo
         escribiendoDiv.remove();
-        const respuestaBot = generarRespuestaBot(textoUsuario);
+
+        let respuestaBot = generarRespuestaBot(textoUsuario);
         agregarMensajeAChat(respuestaBot, 'bot');
     }, 900);
 }
 
-// Pinta un mensaje en pantalla y hace scroll automático hacia abajo.
-// IMPORTANTE: siempre se inserta como texto plano (textContent), nunca como
-// HTML. La versión anterior usaba innerHTML cuando el mensaje contenía la
-// cadena "<img", y esa comprobación se aplicaba también a lo que escribe
-// el usuario: cualquiera podía escribir algo como "<img src=x onerror=...>"
-// en el chat y ejecutar JavaScript arbitrario en la página (XSS). Ahora el
-// contenido del usuario y del bot se trata siempre como texto seguro.
+// Función para pintar los mensajes en pantalla y hacer scroll automático hacia abajo
 function agregarMensajeAChat(mensaje, remitente) {
     const nuevoDiv = document.createElement('div');
     nuevoDiv.classList.add('mensaje', remitente === 'usuario' ? 'mensaje-usuario' : 'mensaje-bot');
-    nuevoDiv.textContent = mensaje;
-
+    
+    // Si el mensaje tiene HTML (imágenes), lo pone como HTML, si no como texto normal
+    if (typeof mensaje === 'string' && mensaje.includes('<img')) {
+        nuevoDiv.innerHTML = mensaje;
+    } else {
+        nuevoDiv.textContent = mensaje;
+    }
+    
     chatMensajes.appendChild(nuevoDiv);
     chatMensajes.scrollTop = chatMensajes.scrollHeight;
 }
 
-// Quita acentos y pasa a minúsculas, para no tener que repetir cada
-// palabra clave con y sin tilde ("direccion" / "dirección").
-function normalizarTexto(texto) {
-    return texto
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
-}
-
-// Reglas de respuesta del asistente. Antes esto era una cadena larga de
-// if/else if con contenido de broma interno (chistes sobre compañeros,
-// referencias ofensivas e insultos) que no debería existir en un chatbot
-// público de cara al cliente. Se retiró ese contenido por completo y se
-// dejaron solo las respuestas informativas sobre la empresa y sus
-// servicios, en una estructura de datos más fácil de mantener y ampliar.
-const reglasRespuesta = [
-    { palabras: ['hola', 'saludar'], respuesta: '¡Hola! ¿Cómo estás? Cuéntame en qué puedo ayudarte.' },
-    { palabras: ['javascript', 'js'], respuesta: 'JavaScript (JS) es un lenguaje dinámico usado para crear páginas web interactivas.' },
-    { palabras: ['html'], respuesta: 'HTML es el lenguaje de marcado estándar utilizado para estructurar el contenido de las páginas web.' },
-    { palabras: ['css'], respuesta: 'CSS es el lenguaje que define la presentación visual de un documento HTML.' },
-    { palabras: ['k&p', 'kyp', 'que hacemos', 'servicios', 'quienes somos'], respuesta: 'K&P Colombia es una empresa dedicada a brindar soluciones integrales en capacitaciones empresariales, asesorías corporativas y gestión de SST en convenio con ARL SURA.' },
-    { palabras: ['creadores', 'quienes son', 'desarrolladores', 'autor'], respuesta: 'Este proyecto y su chatbox fueron desarrollados por Juan Manuel Arbeláez García, Samantha Polo y Emiliano Jaramillo.' },
-    { palabras: ['nombre'], respuesta: 'Soy el asistente virtual de K&P Colombia. ¿En qué puedo ayudarte?' },
-    { palabras: ['que eres'], respuesta: 'Soy una IA creada para resolver tus dudas sobre K&P Colombia y sus servicios. Cuéntame qué necesitas saber.' },
-    { palabras: ['contacto', 'telefono', 'correo', 'email', 'whatsapp'], respuesta: 'Puedes contactarnos por WhatsApp o correo electrónico. Escríbenos y con gusto te atendemos. ¿Quieres que te pase el número o el correo?' },
-    { palabras: ['ubicacion', 'direccion', 'donde estan'], respuesta: 'Estamos ubicados en Colombia y atendemos a nivel nacional. Si necesitas la dirección exacta o zona de cobertura, ¡házmelo saber!' },
-    { palabras: ['precios', 'costos', 'cuanto cuesta', 'tarifas'], respuesta: 'Los precios varían según el tipo de capacitación o asesoría que necesites. Cuéntame qué servicio te interesa y te doy información más precisa.' },
-    { palabras: ['horario'], respuesta: 'Nuestro horario de atención es de lunes a viernes. Si necesitas atención fuera de ese horario, déjanos tu mensaje y te respondemos lo antes posible.' },
-    { palabras: ['sst', 'seguridad y salud', 'sg-sst'], respuesta: 'Ofrecemos gestión integral de SST y del Sistema de Gestión de Seguridad y Salud en el Trabajo (SG-SST) en convenio con ARL SURA. ¿Necesitas implementación, actualización o capacitación?' },
-    { palabras: ['capacitaciones', 'cursos', 'entrenamiento'], respuesta: 'Tenemos capacitaciones empresariales en diferentes temas, incluyendo SST, trabajo en alturas, primeros auxilios, brigadas y más. ¿Sobre qué tema te gustaría información?' },
-    { palabras: ['trabajo en alturas', 'alturas'], respuesta: 'Sí, ofrecemos capacitaciones de Trabajo en Alturas según la normativa vigente: nivel básico, avanzado y reentrenamiento. ¿Quieres más detalles?' },
-    { palabras: ['primeros auxilios'], respuesta: 'Contamos con cursos de Primeros Auxilios básicos y avanzados, ideales para brigadas y cumplimiento de SST. ¿Te interesa para tu empresa?' },
-    { palabras: ['brigadas', 'brigada de emergencia'], respuesta: 'Capacitamos y conformamos Brigadas de Emergencia (primeros auxilios, control de incendios, evacuación y rescate). ¿Necesitas armar o actualizar tu brigada?' },
-    { palabras: ['arl', 'sura'], respuesta: 'Trabajamos en convenio con ARL SURA para apoyar a las empresas en gestión de riesgos laborales y cumplimiento de SST. ¿En qué te podemos ayudar?' },
-    { palabras: ['como contratar', 'proceso'], respuesta: 'El proceso es sencillo: nos cuentas qué necesitas, te enviamos una propuesta y agendamos. ¿Quieres que te oriente paso a paso?' },
-    { palabras: ['certificado'], respuesta: 'Todas nuestras capacitaciones entregan certificado. Según el curso, puede estar avalado por ARL y el Ministerio de Trabajo.' },
-];
-
-const RESPUESTA_POR_DEFECTO = 'No logré entender tu mensaje. Puedes preguntarme por nuestras capacitaciones, la gestión de SST o el convenio con ARL SURA.';
-
+// respuestas basicas
 function generarRespuestaBot(texto) {
-    const mensajeNormalizado = normalizarTexto(texto);
-    const regla = reglasRespuesta.find((r) =>
-        r.palabras.some((palabra) => mensajeNormalizado.includes(normalizarTexto(palabra)))
-    );
-    return regla ? regla.respuesta : RESPUESTA_POR_DEFECTO;
+    const msg = texto.toLowerCase();
+    
+    if (msg.includes("saludar") || msg.includes("hola")) {
+        return "¡Hola! ¿Cómo estas? Cuentame en que puedo ayudarte?";
+    } 
+    else if (msg.includes("javascript") || msg.includes("js")) {
+        return "JavaScript (JS) es un lenguaje genial y dinámico para crear páginas web interactivas";
+    } 
+    else if (msg.includes("yo le digo hola") || msg.includes("le digo hola")) {
+        return "Y ella me dice Goodbye.";
+    } 
+    else if (msg.includes("le digo nena como tu ya no hay") || msg.includes("nena como tu ya no hay")) {
+        return "Me dice que tiene novio pero yo no le creo, y esque se complica cada vez que la veo eo";
+    } 
+    else if (msg.includes("html") || msg.includes("ht")) {
+        return "HTML (HT) es el lenguaje de marcado estándar utilizado para estructurar y desplegar páginas web";
+    } 
+    else if (msg.includes("css") || msg.includes("cs")) {
+        return "CSS (CS) es un lenguaje de diseño gráfico para definir y crear la presentación de un documento estructurado en HTML";
+    } 
+    else if (msg.includes("k&p") || msg.includes("nosotros") || msg.includes("kyp") || msg.includes("que hacemos") || msg.includes("servicios")) {
+        return "K&P Colombia es una empresa dedicada a brindar soluciones integrales en capacitaciones empresariales, asesorías corporativas y gestión de SST en convenio con ARL SURA";
+    } 
+    else if (msg.includes("creadores") || msg.includes("quienes son") || msg.includes("desarrolladores") || msg.includes("autor")) {
+        return "Este proyecto y su chatbox fueron creados por: Juan Manuel Arbeláez García, Samantha Polo y Emiliano Jaramillo";
+    } 
+    else if (msg.includes("nombre")) {
+        return "Soy tu asistente virtual oficial de K&P Colombia, en que puedo ayudarte?";
+    }
+    else if (msg.includes("juan manuel") || msg.includes("arbelaez") || msg.includes("arbeláez") || msg.includes("quien es arbelaez") || msg.includes("quien es juan manuel")) {
+        return "El Legendario Juan Manuel Arbeláez García es un desarrollador web y creador de este proyecto, especializado en soluciones digitales y programación Junior de páginas web, con un enfoque en la experiencia del usuario y la funcionalidad de las aplicaciones web.";
+    }
+
+    // ========== BROMA CON POLO Y EMILIANO ==========
+    else if (msg.includes("polo y emiliano") || msg.includes("emiliano y polo")) {
+        return `
+            <img src="images/polo.jpeg" alt="Polo" style="max-width:100%; border-radius:8px; margin-bottom:6px;">
+            <img src="images/emiliano.jpeg" alt="Emiliano" style="max-width:100%; border-radius:8px; margin-bottom:6px;">
+            <br>estos dos no hicieron una monda
+        `;
+    }
+    else if (msg.includes("polo")) {
+        return `
+            <img src="images/polo.jpeg" alt="Polo" style="max-width:100%; border-radius:8px; margin-bottom:6px;">
+            <br>Polo no aportó na
+        `;
+    }
+    else if (msg.includes("emiliano")) {
+        return `
+            <img src="images/emiliano.jpeg" alt="Emiliano" style="max-width:100%; border-radius:8px; margin-bottom:6px;">
+            <br>Emiliano no aportó na
+        `;
+    }
+    // ===============================================
+    else if (msg.includes("alejinimasturbini")) {
+        return "COMENTAS TUS FALACIAS PALABRAS DE TU SUCIA BOCA ANTE EL SAGRADO NALGÓN QUW TODOS AMAMOS, NUESTRO GENERAL FRUHER EL NAZI SUPREMO USUARIO DE GRAP AL FALLO +, ridley DE MRDA";
+    } 
+    else if (msg.includes("que eres")) {
+        return "soy una IA creada para ayudarte con tus dudas sobre K&P Colombia y sus servicios, asi como también asistente general de la empresa, Cometame que nesecitas saber.....";
+    } 
+    // =========nuevas respuestas ==========
+    else if (msg.includes("contacto") || msg.includes("teléfono") || msg.includes("telefono") || msg.includes("correo") || msg.includes("email") || msg.includes("whatsapp")) {
+        return "Puedes contactarnos por WhatsApp o correo electrónico. Escríbenos y con gusto te atendemos. ¿Quieres que te pase el número o el correo?";
+    }
+    else if (msg.includes("ubicación") || msg.includes("ubicacion") || msg.includes("dirección") || msg.includes("direccion") || msg.includes("dónde están") || msg.includes("donde estan")) {
+        return "Estamos ubicados en Colombia y atendemos a nivel nacional. Si necesitas la dirección exacta o zona de cobertura, ¡házmelo saber!";
+    }
+    else if (msg.includes("precios") || msg.includes("costos") || msg.includes("cuánto cuesta") || msg.includes("cuanto cuesta") || msg.includes("tarifas")) {
+        return "Los precios varían según el tipo de capacitación o asesoría que necesites. Cuéntame qué servicio te interesa y te doy información más precisa.";
+    }
+    else if (msg.includes("horario") || msg.includes("horarios") || msg.includes("horario de atención")) {
+        return "Nuestro horario de atención es de lunes a viernes. Si necesitas atención fuera de ese horario, déjanos tu mensaje y te respondemos lo antes posible.";
+    }
+    else if (msg.includes("sst") || msg.includes("seguridad y salud") || msg.includes("sg-sst")) {
+        return "Ofrecemos gestión integral de SST y Sistema de Gestión de Seguridad y Salud en el Trabajo (SG-SST) en convenio con ARL SURA. ¿Necesitas implementación, actualización o capacitación?";
+    }
+    else if (msg.includes("capacitaciones") || msg.includes("cursos") || msg.includes("entrenamiento")) {
+        return "Tenemos capacitaciones empresariales en diferentes temas, incluyendo SST, trabajo en alturas, primeros auxilios, brigadas y más. ¿Sobre qué tema te gustaría información?";
+    }
+    else if (msg.includes("trabajo en alturas") || msg.includes("alturas")) {
+        return "Sí, ofrecemos capacitaciones de Trabajo en Alturas según la normativa vigente. Incluyen nivel básico, avanzado y reentrenamiento. ¿Quieres más detalles?";
+    }
+    else if (msg.includes("primeros auxilios")) {
+        return "Contamos con cursos de Primeros Auxilios básicos y avanzados, ideales para brigadas y cumplimiento de SST. ¿Te interesa para tu empresa?";
+    }
+    else if (msg.includes("brigadas") || msg.includes("brigada de emergencia")) {
+        return "Capacitamos y conformamos Brigadas de Emergencia (primeros auxilios, control de incendios, evacuación y rescate). ¿Necesitas armar o actualizar tu brigada?";
+    }
+    else if (msg.includes("arl") || msg.includes("sura")) {
+        return "Trabajamos en convenio con ARL SURA para apoyar a las empresas en gestión de riesgos laborales y cumplimiento de SST. ¿En qué te podemos ayudar?";
+    }
+    else if (msg.includes("cómo contratar") || msg.includes("como contratar") || msg.includes("proceso")) {
+        return "El proceso es sencillo: nos cuentas qué necesitas, te enviamos propuesta y agendamos. ¿Quieres que te oriente paso a paso?";
+    }
+    else if (msg.includes("certificado") || msg.includes("certificados")) {
+        return "Todas nuestras capacitaciones entregan certificado. Dependiendo del curso puede ser avalado y válido ante ARL y Ministerio de Trabajo.";
+    }   
+    else if (msg.includes("quiénes somos") || msg.includes("quienes somos")) {
+        return "Somos K&P Colombia, especialistas en capacitaciones empresariales, asesorías corporativas y gestión de SST en convenio con ARL SURA.";
+    }
+    // ==========================================
+    else {
+        return "Lo Siento, no puedo entender tu mensaje";
+    }
 }
 
 // Eventos de clic en el botón de enviar y uso de la tecla "Enter"
 btnEnviar.addEventListener('click', enviarMensaje);
 
-inputText.addEventListener('keypress', function (evento) {
+inputText.addEventListener('keypress', function(evento) {
     if (evento.key === 'Enter') {
         enviarMensaje();
     }
 });
 
-// ================= MENÚ MÓVIL =================
-// El botón hamburguesa (.menu-toggle) ya existía en el CSS pero no tenía
-// ni elemento en el HTML ni lógica en JS: en pantallas pequeñas el menú
-// no se podía abrir. Se añade aquí de forma defensiva (con comprobación
-// de existencia) para que funcione en cualquier página que lo incluya.
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
-
-if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-        const abierto = navMenu.classList.toggle('active');
-        menuToggle.setAttribute('aria-expanded', String(abierto));
-    });
-
-    // Cierra el menú al elegir una opción, para no tener que cerrarlo a mano
-    navMenu.querySelectorAll('a').forEach((enlace) => {
-        enlace.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        });
-    });
-}
-
-// ================= OCULTAR BADGE DE NETLIFY =================
-// La versión anterior sondeaba el DOM con setInterval cada 5 segundos para
-// siempre, incluso si el badge nunca se inyecta o ya fue eliminado. Un
-// MutationObserver reacciona de inmediato cuando el badge aparece en el
-// DOM y no necesita seguir revisando en bucle mientras la pestaña esté
-// abierta. Nota: si el sitio usa el plan gratuito de Netlify, revisa los
-// términos de servicio antes de ocultar el badge de forma permanente.
+// Ocultar badge de Netlify
 function ocultarBadgeNetlify() {
-    document
-        .querySelectorAll('a[href*="netlify"], iframe[src*="netlify"], .netlify-badge')
-        .forEach((badge) => badge.remove());
+    const badges = document.querySelectorAll('a[href*="netlify"], iframe[src*="netlify"], .netlify-badge');
+    badges.forEach(badge => badge.remove());
 }
 
+// Se ejecuta varias veces por si Netlify lo inyecta tarde
 ocultarBadgeNetlify();
-new MutationObserver(ocultarBadgeNetlify).observe(document.body, {
-    childList: true,
-    subtree: true,
-});
+setTimeout(ocultarBadgeNetlify, 1000);
+setTimeout(ocultarBadgeNetlify, 3000);
+setInterval(ocultarBadgeNetlify, 5000);
