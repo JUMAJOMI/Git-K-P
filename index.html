@@ -1,37 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K&P COLOMBIA - Capacitaciones y Asesorías</title>
-    
+
     <!-- SEO y Metadatos -->
     <meta name="description" content="K&P COLOMBIA - Soluciones integrales en capacitación empresarial, asesorías corporativas y gestión de Seguridad y Salud en el Trabajo (SST) con convenio ARL SURA.">
     <meta name="keywords" content="capacitaciones, asesorías empresariales, SST, seguridad y salud en el trabajo, ARL SURA, sector forestal, Colombia">
     <meta name="author" content="JUMAJOMI">
+    <meta name="theme-color" content="#064e3b">
 
-    <!--  previsualización en WhatsApp -->
+    <!-- previsualización en WhatsApp / redes sociales -->
     <meta property="og:title" content="K&P COLOMBIA - Capacitaciones y Asesorías">
     <meta property="og:description" content="Impulsando el desarrollo y la seguridad en las organizaciones con más de tres décadas de trayectoria.">
-    <meta property="og:image" content="images/LOGO K&P (1).png">
+    <meta property="og:image" content="images/logo-kp.png">
     <meta property="og:type" content="website">
 
     <link rel="stylesheet" href="css/stylesheet.css">
-    <link rel="icon" type="image/png" href="images/LOGO K&P (1).png">
+    <link rel="icon" type="image/png" href="images/logo-kp.png">
 </head>
 
 <body>
+    <!-- Enlace de accesibilidad: permite saltar el menú con teclado/lector de pantalla -->
+    <a href="#inicio" class="skip-link">Saltar al contenido principal</a>
+
     <header class="header">
         <div class="logo">
             <div class="logo-container">
-                <img src="images/LOGO K&P (1).png" alt="Logo K&P" class="logo-img">
+                <img src="images/logo-kp.png" alt="Logo K&P" class="logo-img">
                 <span class="logo-text">K&P COLOMBIA</span>
             </div>
         </div>
-        
+
+        <!-- Botón de menú hamburguesa (antes solo existía en el CSS, sin HTML ni JS) -->
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navMenu">
+            ☰
+        </button>
+
         <!-- navegación-->
-        <nav class="nav" id="navMenu">
+        <nav class="nav" id="navMenu" aria-label="Menú principal">
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="capacitaciones.html">Capacitaciones</a></li>
@@ -53,13 +62,13 @@
 
     <!-- SECCIÓN NOSOTROS -->
     <section id="nosotros" class="section">
-    <h2>Sobre Nosotros</h2>
-    <p>
-        En <strong>K&P COLOMBIA</strong> nos especializamos en brindar soluciones integrales en capacitación empresarial, asesorías corporativas y gestión de Seguridad y Salud en el Trabajo (SST). 
-        Trabajamos de la mano con las organizaciones para fortalecer las competencias de sus equipos, optimizar sus procesos y garantizar el cumplimiento de los más altos estándares de calidad, seguridad y normatividad vigente. Más de tres décadas de trayectoria en Colombia y una presencia internacional creciente, reuniendo a empresas, especialistas y profesionales del sector forestal en torno a seguridad, mecanización, innovación y desarrollo.
-        <br><br>
-        Nuestro compromiso es acompañar a las empresas en su crecimiento, ofreciendo un servicio cercano, técnico y orientado a resultados reales, siempre con el respaldo de nuestro convenio con <strong>ARL SURA</strong>.
-    </p>
+        <h2>Sobre Nosotros</h2>
+        <p>
+            En <strong>K&P COLOMBIA</strong> nos especializamos en brindar soluciones integrales en capacitación empresarial, asesorías corporativas y gestión de Seguridad y Salud en el Trabajo (SST).
+            Trabajamos de la mano con las organizaciones para fortalecer las competencias de sus equipos, optimizar sus procesos y garantizar el cumplimiento de los más altos estándares de calidad, seguridad y normatividad vigente. Más de tres décadas de trayectoria en Colombia y una presencia internacional creciente, reuniendo a empresas, especialistas y profesionales del sector forestal en torno a seguridad, mecanización, innovación y desarrollo.
+            <br><br>
+            Nuestro compromiso es acompañar a las empresas en su crecimiento, ofreciendo un servicio cercano, técnico y orientado a resultados reales, siempre con el respaldo de nuestro convenio con <strong>ARL SURA</strong>.
+        </p>
     </section>
 
     <!-- SECCIÓN GALERÍA DE TRABAJO -->
@@ -88,7 +97,7 @@
         </div>
         <br> <br>
         <h2>Nuestro Trabajo</h2>
-        <p class="subtitle">Aquí encontrarás algunos registros de las capacitaciones, asesorías y acompañamientos que hemos realizado en campo. 
+        <p class="subtitle">Aquí encontrarás algunos registros de las capacitaciones, asesorías y acompañamientos que hemos realizado en campo.
         Cada imagen refleja el <span>compromiso</span> de nuestro equipo por entregar formación de calidad y generar un impacto positivo en las empresas y trabajadores que confían en nosotros, los seminarios <strong>K&P</strong> conectan la realidad operacional con nuevas tecnologías, metodologías y experiencias desarrolladas en otros mercados forestales.</p>
     </section>
 
@@ -109,16 +118,16 @@
             </div>
             <div class="footer-contact">
                 <h4>Contacto</h4>
-                <p>Email: kypcolombia@gmail.com</p>
-                <p>Teléfono: +57 3113300110</p>
+                <p>Email: <a href="mailto:kypcolombia@gmail.com">kypcolombia@gmail.com</a></p>
+                <p>Teléfono: <a href="tel:+573113300110">+57 3113300110</a></p>
                 <p>Ubicación: Colombia</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 K&P COLOMBIA - Todos los derechos reservados por <strong>&copy;JUMAJOMI</strong></p>
+            <p>&copy; 2026 K&P COLOMBIA - Todos los derechos reservados por <strong>JUMAJOMI</strong></p>
         </div>
     </footer>
-  
+
     <!-- ================= CHATBOX FLOTANTE COMPRIMIBLE ================= -->
     <div id="chatWidget" class="chat-widget-wrapper">
         <button id="chatToggleBtn" class="chat-toggle-btn" aria-label="Abrir chat">
@@ -128,7 +137,7 @@
         <div id="chatContainer" class="chat-container">
             <div class="chat-header">
                 <span>Asistente K&P COLOMBIA</span>
-                <button id="chatCloseBtn" class="chat-close-btn">&times;</button>
+                <button id="chatCloseBtn" class="chat-close-btn" aria-label="Cerrar chat">&times;</button>
             </div>
             <div class="chat-mensajes" id="chatMensajes">
                 <div class="mensaje mensaje-bot">¡Hola! ¿En qué te puedo ayudar hoy?</div>
@@ -140,9 +149,9 @@
         </div>
     </div>
 
-    <!-- Enlace al archivo JavaScript externo -->
-    <script src="js/scrip.js"></script>
-    
+    <!-- Enlace al archivo JavaScript externo (renombrado: scrip.js -> script.js) -->
+    <script src="js/script.js"></script>
+
 </body>
 
 </html>

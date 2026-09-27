@@ -1,4 +1,17 @@
-/* ================= RESET Y GENERALES (otravez) ================= */
+/* ================= VARIABLES DE MARCA ================= */
+:root {
+    --color-primary: #064e3b;
+    --color-primary-hover: #053f30;
+    --color-accent: #a3ffac;
+    --color-cream: #f8e7c9;
+    --color-text-dark: #062200;
+    --color-body-text: #1a3a33;
+    --radius-sm: 5px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+}
+
+/* ================= RESET Y GENERALES ================= */
 * {
     margin: 0;
     padding: 0;
@@ -7,21 +20,39 @@
 
 html {
     scroll-behavior: smooth;
-    font-family: 'Times New Roman', Times, serif;
-    color: #16534e;
+    /* Fuente sans-serif moderna en vez de Times New Roman: mejor legibilidad
+       en pantalla y una imagen más profesional para un sitio corporativo. */
+    font-family: 'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+    color: var(--color-body-text);
 }
 
-/* ================= HEADER ================= */
+/* Enlace de accesibilidad: oculto hasta recibir foco por teclado */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: 0;
+    background: var(--color-primary);
+    color: var(--color-cream);
+    padding: 10px 16px;
+    z-index: 2000;
+    border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.skip-link:focus {
+    left: 0;
+}
+
+/* ================= HEADER Y NAVEGACIÓN ================= */
 .header {
-    background-color: #064e3b;
-    color: #f8e7c9;
+    background-color: var(--color-primary);
+    color: var(--color-cream);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 5%;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
@@ -38,43 +69,84 @@ html {
 }
 
 .logo-text {
-    color: #f8e7c9;
+    color: var(--color-cream);
     font-size: 1.4rem;
     font-weight: bold;
     white-space: nowrap;
 }
 
-/* ================= NAVEGACIÓN ================= */
 .nav ul {
     display: flex;
     list-style: none;
     align-items: center;
-}
-
-.nav ul li {
-    margin-left: 20px;
+    gap: 20px;
 }
 
 .nav ul li a {
-    color: #f8e7c9;
+    color: var(--color-cream);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 15px;
     transition: color 0.3s ease;
 }
 
-.nav ul li a:hover {
-    color: #a3ffac;
+.nav ul li a:hover,
+.nav ul li a:focus-visible {
+    color: var(--color-accent);
+}
+
+/* Botón de menú hamburguesa (oculto en escritorio) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-cream);
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+    .nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--color-primary);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+    }
+    .nav.active {
+        display: block;
+    }
+    .nav ul {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+    .nav ul li {
+        margin: 10px 0;
+    }
 }
 
 /* ================= HERO ================= */
 .hero {
-    background: linear-gradient(rgba(30, 41, 30, 0.7), rgba(72, 99, 85, 0.8)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpSs4DynmA8V1EVsQ3ctpfyRZ_L5BCyzfsY9CYRvesvA&s=10') no-repeat center center/cover;
+    /* Antes usaba una miniatura de la caché de Google (poco fiable y puede
+       dejar de funcionar en cualquier momento). Se deja un degradado como
+       respaldo y una imagen propia como capa principal: reemplaza
+       images/hero-bg.jpg por una foto propia de la empresa. */
+    background: linear-gradient(rgba(6, 78, 59, 0.75), rgba(6, 78, 59, 0.85)), url('../images/hero-bg.jpg') no-repeat center center / cover;
+    background-color: var(--color-primary);
     height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    color: #f8e7c9;
+    color: var(--color-cream);
     padding: 0 20px;
 }
 
@@ -87,16 +159,17 @@ html {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 25px;
-    background-color: #064e3b;
-    color: #f8e7c9;
+    background-color: var(--color-primary);
+    color: var(--color-cream);
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-    background-color: #064e3b;
+.btn:hover,
+.btn:focus-visible {
+    background-color: var(--color-primary-hover);
 }
 
 /* ================= SECCIONES ================= */
@@ -110,7 +183,7 @@ html {
 }
 
 .section h2 {
-    color: #062200;
+    color: var(--color-text-dark);
     margin-bottom: 15px;
 }
 
@@ -156,7 +229,7 @@ html {
 .foto-colaborador p {
     margin-top: 12px;
     font-weight: bold;
-    color: #062200;
+    color: var(--color-text-dark);
     font-size: 0.95rem;
 }
 
@@ -171,7 +244,7 @@ html {
 .card {
     background: #dbffdd;
     border: 1px solid #c2f5c5;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     width: 300px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -187,7 +260,7 @@ html {
 
 .card h3 {
     margin-bottom: 15px;
-    color: #064e3b;
+    color: var(--color-primary);
 }
 
 .card p {
@@ -210,10 +283,10 @@ html {
     line-height: 1.3;
 }
 
-/* ================= SECCIÓN ARL SURA ================= */   
+/* ================= SECCIÓN ARL SURA ================= */
 .sura-container {
-    background-color: #f8e7c9;
-    border-left: 5px solid #064e3b;
+    background-color: var(--color-cream);
+    border-left: 5px solid var(--color-primary);
     padding: 25px;
     margin-top: 15px;
     border-radius: 4px;
@@ -223,7 +296,7 @@ html {
 
 /* ================= FOOTER ================= */
 .footer {
-    background-color: #064e3b;
+    background-color: var(--color-primary);
     color: #c4af8c;
     padding: 40px 10% 20px 10%;
 }
@@ -236,12 +309,22 @@ html {
     gap: 20px;
 }
 
+.footer-contact a {
+    color: var(--color-cream);
+    text-decoration: none;
+}
+
+.footer-contact a:hover,
+.footer-contact a:focus-visible {
+    color: var(--color-accent);
+}
+
 .footer-bottom {
     text-align: center;
-    border-top: 1px solid rgb(0, 27, 6);
+    border-top: 1px solid rgba(0, 27, 6, 0.6);
     padding-top: 15px;
     font-size: 0.9rem;
-    color: #f8e7c9;
+    color: var(--color-cream);
 }
 
 /* ================= CHATBOX ================= */
@@ -254,23 +337,24 @@ html {
 }
 
 .chat-toggle-btn {
-    background-color: #064e3b;
-    color: #f8e7c9;
+    background-color: var(--color-primary);
+    color: var(--color-cream);
     border: none;
     width: 62px;
     height: 62px;
     border-radius: 50%;
     font-size: 28px;
     cursor: pointer;
-    box-shadow: 0 6px 20px #064e3b;
+    box-shadow: 0 6px 20px rgba(6, 78, 59, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.chat-toggle-btn:hover {
-    background-color: #064e3b;
+.chat-toggle-btn:hover,
+.chat-toggle-btn:focus-visible {
+    background-color: var(--color-primary-hover);
     transform: scale(1.1);
 }
 
@@ -280,8 +364,8 @@ html {
     right: 0;
     width: 320px;
     height: 420px;
-    background: #f8e7c9;
-    border-radius: 16px;
+    background: var(--color-cream);
+    border-radius: var(--radius-lg);
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
     overflow: hidden;
     display: flex;
@@ -298,7 +382,7 @@ html {
 }
 
 .chat-header {
-    background-color: #064e3b;
+    background-color: var(--color-primary);
     color: white;
     padding: 14px 18px;
     display: flex;
@@ -318,8 +402,9 @@ html {
     line-height: 1;
 }
 
-.chat-close-btn:hover {
-    color: #a3ffac;
+.chat-close-btn:hover,
+.chat-close-btn:focus-visible {
+    color: var(--color-accent);
 }
 
 .chat-mensajes {
@@ -347,7 +432,7 @@ html {
 }
 
 .chat-mensajes::-webkit-scrollbar-thumb:hover {
-    background-color: #064e3b;
+    background-color: var(--color-primary);
 }
 
 .mensaje {
@@ -357,7 +442,7 @@ html {
     word-wrap: break-word;
     font-size: 0.9rem;
     line-height: 1.45;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .mensaje.mensaje-bot {
@@ -368,22 +453,13 @@ html {
 }
 
 .mensaje.mensaje-usuario {
-    background-color: #064e3b;
+    background-color: var(--color-primary);
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 6px;
 }
 
-/* Imágenes dentro del chat */
-.mensaje img {
-    border-radius: 10px;
-    margin-bottom: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-    display: block;
-    max-width: 100%;
-}
-
-/* Indicador de escribiendo */
+/* Indicador de "escribiendo..." */
 .mensaje.escribiendo {
     display: flex;
     gap: 5px;
@@ -395,7 +471,7 @@ html {
 .mensaje.escribiendo .punto {
     width: 7px;
     height: 7px;
-    background-color: #064e3b;
+    background-color: var(--color-primary);
     border-radius: 50%;
     animation: rebotar 1.2s infinite ease-in-out;
 }
@@ -437,13 +513,13 @@ html {
     font-size: 0.9rem;
 }
 
-.chat-input input:focus {
-    border-color: #064e3b;
-    box-shadow: 0 0 0 3px rgba(0, 105, 5, 0.12);
+.chat-input input:focus-visible {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(6, 78, 59, 0.15);
 }
 
 .chat-input button {
-    background-color: #064e3b;
+    background-color: var(--color-primary);
     color: white;
     border: none;
     padding: 10px 18px;
@@ -454,72 +530,20 @@ html {
     transition: background-color 0.2s;
 }
 
-.chat-input button:hover {
-    background-color: #064e3b;
-}   
+.chat-input button:hover,
+.chat-input button:focus-visible {
+    background-color: var(--color-primary-hover);
+}
 
-/* Ocultar el badge de Netlify */
+/* Ocultar el badge de Netlify (ver también script.js) */
 .netlify-badge,
-[href*="netlify.com"] img,
-a[href*="netlify"] {
+a[href*="netlify"],
+iframe[src*="netlify"] {
     display: none !important;
 }
-/* Ocultar definitivamente el badge de Netlify */
-iframe[src*="netlify"],
-a[href*="netlify.com"],
-.netlify-badge,
-[class*="netlify"],
-body > div:last-child a[href*="netlify"] {
-    display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-}
-/* ==========================================
-   NUEVOS ESTILOS: MENÚ MÓVIL Y GALERÍA LIGHTBOX
-   ========================================== */
 
-/* --- MENÚ HAMBURGUESA MÓVIL --- */
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: #333;
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-    .nav {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        z-index: 999;
-    }
-    .nav.active {
-        display: block;
-    }
-    .nav ul {
-        flex-direction: column;
-        padding: 20px;
-        text-align: center;
-    }
-    .nav li {
-        margin: 10px 0;
-    }
-}
-
-/* --- GALERÍA E INTERACTIVIDAD DE IMÁGENES --- */
+/* ================= GALERÍA E INTERACTIVIDAD DE IMÁGENES ================= */
+/* Usado en otras páginas del sitio (ej. TrabajoR.html) */
 .galeria-imagenes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -541,7 +565,7 @@ body > div:last-child a[href*="netlify"] {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* --- VENTANA MODAL LIGHTBOX --- */
+/* Ventana modal lightbox (requiere el JS correspondiente en la página que la use) */
 .lightbox {
     display: none;
     position: fixed;
@@ -553,6 +577,10 @@ body > div:last-child a[href*="netlify"] {
     background-color: rgba(0, 0, 0, 0.85);
     align-items: center;
     justify-content: center;
+}
+
+.lightbox.active {
+    display: flex;
 }
 
 .lightbox-content {
@@ -571,76 +599,4 @@ body > div:last-child a[href*="netlify"] {
     font-weight: bold;
     cursor: pointer;
     user-select: none;
-}
-/* --- CORRECCIÓN DE VISIBILIDAD DEL MENÚ EN COMPUTADOR --- */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background-color: #064e3b; /* Fondo verde oscuro corporativo */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav a {
-    text-decoration: none;
-    color: #ffffff !important; /* Texto blanco asegurado */
-    font-weight: 600;
-    font-size: 15px;
-    transition: color 0.3s ease;
-}
-
-.nav a:hover {
-    color: #a3e4d7 !important; /* Color de realce al pasar el mouse */
-}
-
-/* Ocultar botón hamburguesa en pantallas grandes */
-.menu-toggle {
-    display: none;
-}
-/* --- CORRECCIÓN DE VISIBILIDAD DEL MENÚ EN COMPUTADOR --- */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 5%;
-    background-color: #064e3b; /* Fondo verde oscuro corporativo */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-    margin: 0;
-    padding: 0;
-}
-
-.nav a {
-    text-decoration: none;
-    color: #ffffff !important; /* Texto blanco asegurado */
-    font-weight: 600;
-    font-size: 15px;
-    transition: color 0.3s ease;
-}
-
-.nav a:hover {
-    color: #a3e4d7 !important; /* Color de realce al pasar el mouse */
-}
-
-/* Ocultar botón hamburguesa por defecto en computadores */
-.menu-toggle {
-    display: none;
 }
