@@ -8,6 +8,26 @@ const chatCloseBtn = document.getElementById('chatCloseBtn');
 const inputText = document.getElementById('inputText');
 const btnEnviar = document.getElementById('btnEnviar');
 const chatMensajes = document.getElementById('chatMensajes');
+const chatMensajes = document.getElementById('chatMensajes');
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+
+if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!isExpanded));
+        menuToggle.setAttribute('aria-label', isExpanded ? 'Abrir menú' : 'Cerrar menú');
+        navMenu.classList.toggle('active', !isExpanded);
+    });
+
+    navMenu.addEventListener('click', (event) => {
+        if (event.target.closest('a')) {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.setAttribute('aria-label', 'Abrir menú');
+            navMenu.classList.remove('active');
+        }
+    });
+}
 
 // Abrir y cerrar el chat al hacer clic en la burbuja flotante
 chatToggleBtn.addEventListener('click', () => {
