@@ -8,7 +8,6 @@ const chatCloseBtn = document.getElementById('chatCloseBtn');
 const inputText = document.getElementById('inputText');
 const btnEnviar = document.getElementById('btnEnviar');
 const chatMensajes = document.getElementById('chatMensajes');
-const chatMensajes = document.getElementById('chatMensajes');
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 
