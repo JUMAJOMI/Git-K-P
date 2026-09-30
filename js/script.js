@@ -29,17 +29,21 @@ if (menuToggle && navMenu) {
 }
 
 // Abrir y cerrar el chat al hacer clic en la burbuja flotante
-chatToggleBtn.addEventListener('click', () => {
-    chatContainer.classList.toggle('active');
-    if (chatContainer.classList.contains('active')) {
-        inputText.focus();
-    }
-});
+if (chatToggleBtn && chatContainer && inputText) {
+    chatToggleBtn.addEventListener('click', () => {
+        chatContainer.classList.toggle('active');
+        if (chatContainer.classList.contains('active')) {
+            inputText.focus();
+        }
+    });
+}
 
 // Botón para cerrar la ventana del chat con la "X"
-chatCloseBtn.addEventListener('click', () => {
-    chatContainer.classList.remove('active');
-});
+if (chatCloseBtn && chatContainer) {
+    chatCloseBtn.addEventListener('click', () => {
+        chatContainer.classList.remove('active');
+    });
+}
 
 // Función principal para enviar el mensaje del usuario
 // Función principal para enviar el mensaje del usuario
@@ -192,13 +196,17 @@ function generarRespuestaBot(texto) {
 }
 
 // Eventos de clic en el botón de enviar y uso de la tecla "Enter"
-btnEnviar.addEventListener('click', enviarMensaje);
+if (btnEnviar) {
+    btnEnviar.addEventListener('click', enviarMensaje);
+}
 
-inputText.addEventListener('keypress', function(evento) {
-    if (evento.key === 'Enter') {
-        enviarMensaje();
-    }
-});
+if (inputText) {
+    inputText.addEventListener('keypress', function(evento) {
+        if (evento.key === 'Enter') {
+            enviarMensaje();
+        }
+    });
+}
 
 // Ocultar badge de Netlify
 function ocultarBadgeNetlify() {

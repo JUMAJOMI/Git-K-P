@@ -670,11 +670,12 @@ body > div:last-child a[href*="netlify"] {
         margin: 0;
     }
 
+    .nav ul li {
+        margin-left: 0;
+    }
+
     .nav a {
         display: block;
         padding: 12px 0;
     }
-}
-.menu-toggle {
-    display: none;
 }
