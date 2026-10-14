@@ -679,3 +679,81 @@ body > div:last-child a[href*="netlify"] {
         padding: 12px 0;
     }
 }
+
+/* ================= ESTILOS PARA LA SECCIÓN DE SEMINARIOS ================= */
+.seminarios-seccion {
+    text-align: left;
+    max-width: 1000px;
+    margin: 40px auto 0 auto;
+    padding-top: 20px;
+    border-top: 2px solid #eaeaea;
+}
+
+.seminarios-seccion .subtitle {
+    text-align: left;
+    margin-left: 0;
+    margin-bottom: 30px;
+}
+
+.seminarios-grid {
+    display: flex;
+    justify-content: flex-start;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.seminario-card {
+    width: 310px;
+    background: #ffffff;
+    border: 1px solid #c2f5c5;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.seminario-card:hover {
+    transform: translateY(-5px);
+}
+
+.seminario-tag {
+    background-color: #e8f8e9;
+    color: #064e3b;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.seminario-card h3 {
+    color: #062200;
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.seminario-card p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.seminario-divider {
+    width: 100%;
+    border: none;
+    border-top: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.seminario-footer {
+    color: #666;
+    font-size: 0.82rem;
+}
