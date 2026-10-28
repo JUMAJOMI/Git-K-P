@@ -91,7 +91,7 @@ function agregarMensajeAChat(mensaje, remitente) {
 function generarRespuestaBot(texto) {
     const msg = texto.toLowerCase();
     
-    if (msg.includes("saludar") || msg.includes("hola")) {
+    if (msg.includes("saludar") || msg.includes("buenos días") || msg.includes("buenos dias") || msg.includes("buenas tardes") || msg.includes("buenas noches")) {
         return "¡Hola! ¿Cómo estas? Cuentame en que puedo ayudarte?";
     } 
     else if (msg.includes("javascript") || msg.includes("js")) {
@@ -101,7 +101,10 @@ function generarRespuestaBot(texto) {
         return "Y ella me dice Goodbye.";
     } 
     else if (msg.includes("le digo nena como tu ya no hay") || msg.includes("nena como tu ya no hay")) {
-        return "Me dice que tiene novio pero yo no le creo, y esque se complica cada vez que la veo eo";
+        return "Me dice que tiene novio pero yo no le creo";
+    } 
+    else if (msg.includes("y es que se complica cada vez que la veo") || msg.includes("es que se complica cada vez que la veo")) {
+        return "Eo";
     } 
     else if (msg.includes("html") || msg.includes("ht")) {
         return "HTML (HT) es el lenguaje de marcado estándar utilizado para estructurar y desplegar páginas web";
