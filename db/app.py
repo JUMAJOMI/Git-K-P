@@ -34,7 +34,7 @@ def enviar_correo(empresa, correo_cliente, detalle):
     
     # TUS CREDENCIALES DE ENVÍO
     REMITENTE = "jumadiscor00@gmail.com"  # Tu correo de Gmail
-    PASSWORD = "Juma0902*"   # Tu contraseña de aplicación de 9 dígitos (no tu contraseña normal de Gmail)
+    PASSWORD = "Juma0902"   # Tu contraseña de aplicación de 9 dígitos (no tu contraseña normal de Gmail)
 
     asunto = f"Nueva Solicitud de Asesoría - {empresa}"
     cuerpo = f"""

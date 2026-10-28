@@ -54,10 +54,10 @@ CREATE TABLE IF NOT EXISTS seminarios (
 
 -- Insert training courses
 INSERT INTO cursos (nombre, descripcion, categoria, duracion, certificacion, nivel) VALUES
-('Seguridad y Salud en el Trabajo', 'Formación en prevención de riesgos laborales, prácticas seguras y fortalecimiento de la cultura de seguridad', 'SST', '1 día', 'Aprobado por ARL SURA', 'Básico'),
+('da para líderes y supervisores de trabajo en alturas', 'SST', '1 día', 'Certificado ARL SURA', 'Avanzado'),
+('Primeros Auxilios Básicos', 'Formación para responder ante emergencias con primeros aSeguridad y Salud en el Trabajo', 'Formación en prevención de riesgos laborales, prácticas seguras y fortalecimiento de la cultura de seguridad', 'SST', '1 día', 'Aprobado por ARL SURA', 'Básico'),
 ('Trabajo en Alturas', 'Capacitación y reentrenamiento para realizar trabajos en alturas con prácticas seguras', 'SST', '2 días', 'Certificado ARL SURA', 'Básico'),
-('Trabajo en Alturas Avanzado', 'Capacitación avanzada para líderes y supervisores de trabajo en alturas', 'SST', '1 día', 'Certificado ARL SURA', 'Avanzado'),
-('Primeros Auxilios Básicos', 'Formación para responder ante emergencias con primeros auxilios y evacuación', 'Emergencia', '1 día', 'Incluido en brigada', 'Básico'),
+('Trabajo en Alturas Avanzado', 'Capacitación avanzauxilios y evacuación', 'Emergencia', '1 día', 'Incluido en brigada', 'Básico'),
 ('Primeros Auxilios Avanzados', 'Formación avanzada en primeros auxilios y manejo de emergencias', 'Emergencia', '1 día', 'Certificado K&P', 'Avanzado'),
 ('Brigadas de Emergencia', 'Conformación de brigadas empresariales con primeros auxilios, control de incendios y rescate', 'Emergencia', '2 días', 'Certificado K&P', 'Intermedio'),
 ('Gestión de SST', 'Asesoría corporativa para implementación de Sistema de Gestión de Seguridad y Salud en el Trabajo', 'SST', 'Variable', 'Aprobado ARL SURA', 'Avanzado');
